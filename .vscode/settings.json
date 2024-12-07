@@ -1,3 +1,7 @@
 {
-  "conventionalCommits.scopes": ["frontend", "channel-backend"]
+  "conventionalCommits.scopes": [
+    "frontend",
+    "channel-backend",
+    "global-backend"
+  ]
 }

@@ -18,6 +18,9 @@
     "channel.start": "bun run --cwd packages/channel-backend start",
     "channel.dev": "bun run --cwd packages/channel-backend dev",
     "channel.build": "bun run --cwd packages/channel-backend build",
-    "all.dev": "npm-run-all --parallel frontend.dev channel.dev"
+    "global.start": "bun run --cwd packages/global-backend start",
+    "global.dev": "bun run --cwd packages/global-backend dev",
+    "global.build": "bun run --cwd packages/global-backend build",
+    "all.dev": "npm-run-all --parallel frontend.dev channel.dev global.dev"
   }
 }
