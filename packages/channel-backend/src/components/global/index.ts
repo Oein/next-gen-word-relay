@@ -1,6 +1,8 @@
 import type { Express } from "express";
 import { Router } from "express";
 
+import { getConnectionCount } from "./../ws/index";
+
 export default function applyGlobalBackend(app: Express) {
   const router = Router();
   app.use(
@@ -19,6 +21,8 @@ export default function applyGlobalBackend(app: Express) {
   router.get("/ping", (req, res) => {
     res.send({
       ok: true,
+      connections: getConnectionCount(),
+      mx: parseInt(process.env.MAX_CONNECTIONS || "0"),
     });
   });
 }

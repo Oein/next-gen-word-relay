@@ -2,6 +2,7 @@ import type { Config } from "./types";
 
 const CFG: Config = {
   PORT: parseInt(process.env.PORT || "3004"),
+  PING_INTERVAL: 5000,
 
   channelServers: [
     {

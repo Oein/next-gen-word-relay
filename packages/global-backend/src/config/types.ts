@@ -6,6 +6,7 @@ export type IChannelServer = {
 
 export type Config = {
   PORT: number;
+  PING_INTERVAL: number;
 
   channelServers: IChannelServer[];
 };

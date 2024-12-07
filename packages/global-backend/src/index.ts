@@ -3,7 +3,11 @@ import { createServer } from "http";
 import "dotenv/config";
 import CFG from "./config/config";
 
+import applyChannelManager from "./components/channelManager";
+
 const app = express();
+
+applyChannelManager(app);
 
 app.get("/", (req, res) => {
   res.send({

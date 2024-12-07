@@ -2,6 +2,7 @@
   "conventionalCommits.scopes": [
     "frontend",
     "channel-backend",
-    "global-backend"
+    "global-backend",
+    "backends"
   ]
 }
