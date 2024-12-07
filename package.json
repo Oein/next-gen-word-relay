@@ -15,9 +15,9 @@
     "frontend.preview": "bun run --cwd packages/frontend preview",
     "frontend.check": "bun run --cwd packages/frontend check",
     "frontend.check:watch": "bun run --cwd packages/frontend check:watch",
-    "backend.start": "bun run --cwd packages/backend start",
-    "backend.dev": "bun run --cwd packages/backend dev",
-    "backend.build": "bun run --cwd packages/backend build",
-    "fbend.dev": "npm-run-all --parallel frontend.dev backend.dev"
+    "channel.start": "bun run --cwd packages/channel-backend start",
+    "channel.dev": "bun run --cwd packages/channel-backend dev",
+    "channel.build": "bun run --cwd packages/channel-backend build",
+    "all.dev": "npm-run-all --parallel frontend.dev channel.dev"
   }
 }

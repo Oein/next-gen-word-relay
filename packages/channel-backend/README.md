@@ -1,6 +1,6 @@
-# package.backend
+# package.channel-backend
 
-Typescript + Express기반의 백엔드
+게임 채널들을 위한 서버.
 
 To install dependencies:
 
