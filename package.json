@@ -1,0 +1,23 @@
+{
+  "name": "word-relay",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "npm-run-all": "^4.1.5"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "frontend.dev": "bun run --cwd packages/frontend dev",
+    "frontend.build": "bun run --cwd packages/frontend build",
+    "frontend.preview": "bun run --cwd packages/frontend preview",
+    "frontend.check": "bun run --cwd packages/frontend check",
+    "frontend.check:watch": "bun run --cwd packages/frontend check:watch",
+    "backend.start": "bun run --cwd packages/backend start",
+    "backend.dev": "bun run --cwd packages/backend dev",
+    "backend.build": "bun run --cwd packages/backend build",
+    "fbend.dev": "npm-run-all --parallel frontend.dev backend.dev"
+  }
+}
