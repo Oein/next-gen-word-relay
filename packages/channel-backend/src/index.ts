@@ -2,6 +2,7 @@ import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import "dotenv/config";
+import logger from "./components/logger";
 
 import applyWS from "./components/ws";
 import applyGlobalBackend from "./components/global";
@@ -33,5 +34,5 @@ const io = new Server(server, {
 applyWS(app, io);
 
 server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  logger.success(`Server is running on port ${PORT}`);
 });
