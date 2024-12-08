@@ -5,6 +5,9 @@ import CFG from "./config/config";
 
 import applyChannelManager from "./components/channelManager";
 import logger from "./components/logger";
+import { connect as connectDB } from "./components/db";
+
+await connectDB();
 
 const app = express();
 

@@ -6,6 +6,9 @@ import logger from "./components/logger";
 
 import applyWS from "./components/ws";
 import applyGlobalBackend from "./components/global";
+import { connect as connectDB } from "./components/db";
+
+await connectDB();
 
 const app = express();
 app.use(
