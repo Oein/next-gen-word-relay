@@ -25,7 +25,8 @@
     "noPropertyAccessFromIndexSignature": false,
 
     "paths": {
-      "@logger": ["../common-backend/src/logger/index.ts"]
+      "@logger": ["../common-backend/src/logger/index.ts"],
+      "@common/*": ["../common-backend/src/*"]
     }
   }
 }

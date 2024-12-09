@@ -8,7 +8,7 @@ import applyChannelManager from "./components/channelManager";
 
 // Common Libraries
 import logger from "@logger";
-import { connect as connectDB } from "../../common-backend/src/db/index";
+import { connect as connectDB } from "@common/db";
 
 // Main
 await connectDB();
