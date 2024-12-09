@@ -2,12 +2,16 @@ import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import "dotenv/config";
-import logger from "./components/logger";
 
+// Components
 import applyWS from "./components/ws";
 import applyGlobalBackend from "./components/global";
-import { connect as connectDB } from "./components/db";
 
+// Common Libraries
+import logger from "@logger";
+import { connect as connectDB } from "../../common-backend/src/db/index";
+
+// Main
 await connectDB();
 
 const app = express();

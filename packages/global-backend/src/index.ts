@@ -3,10 +3,14 @@ import { createServer } from "http";
 import "dotenv/config";
 import CFG from "./config/config";
 
+// Components
 import applyChannelManager from "./components/channelManager";
-import logger from "./components/logger";
-import { connect as connectDB } from "./components/db";
 
+// Common Libraries
+import logger from "@logger";
+import { connect as connectDB } from "../../common-backend/src/db/index";
+
+// Main
 await connectDB();
 
 const app = express();

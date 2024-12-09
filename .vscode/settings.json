@@ -3,6 +3,7 @@
     "frontend",
     "channel-backend",
     "global-backend",
+    "common-backend",
     "backends"
   ]
 }
