@@ -12,7 +12,7 @@ import applyChannelManager from "./components/channelManager";
 
 // Common Libraries
 import logger from "@logger";
-import { connect as connectDB, url as DBURL } from "@common/db";
+import { connect as connectDB, DBNAME, url as DBURL } from "@common/db";
 
 // Main
 await connectDB();
@@ -29,6 +29,7 @@ app.use(cookieParser());
 const MongoDBStore = MDBSession(session);
 const store = new MongoDBStore({
   uri: DBURL,
+  databaseName: DBNAME,
   collection: "sessions",
 });
 store.on("error", function (error) {

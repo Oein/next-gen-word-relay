@@ -2,6 +2,7 @@ import { Db, MongoClient } from "mongodb";
 import logger from "../logger";
 
 export const url = process.env.MONGO_URI || "mongodb://localhost:27017";
+export const DBNAME = process.env.DB_NAME || "game";
 const client = new MongoClient(url);
 
 let db: Db;
@@ -19,7 +20,7 @@ export async function connect() {
   logger.loading("Connecting to MongoDB");
   try {
     await client.connect();
-    db = client.db("game");
+    db = client.db(DBNAME);
 
     await ensureIndexes();
   } catch (e) {
