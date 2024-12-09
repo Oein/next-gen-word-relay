@@ -3,13 +3,16 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import "dotenv/config";
 
+import session from "express-session";
+import MDBSession from "connect-mongodb-session";
+
 // Components
 import applyWS from "./components/ws";
 import applyGlobalBackend from "./components/global";
 
 // Common Libraries
 import logger from "@logger";
-import { connect as connectDB } from "@common/db";
+import { connect as connectDB, url as DBURL } from "@common/db";
 
 // Main
 await connectDB();
@@ -20,6 +23,32 @@ app.use(
     limit: "1mb",
   })
 );
+const MongoDBStore = MDBSession(session);
+const store = new MongoDBStore({
+  uri: DBURL,
+  collection: "sessions",
+});
+store.on("error", function (error) {
+  logger.error(error);
+});
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "SuperS3cr3t 5e55i0n K3y",
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+    },
+    store: store,
+    // Boilerplate options, see:
+    // * https://www.npmjs.com/package/express-session#resave
+    // * https://www.npmjs.com/package/express-session#saveuninitialized
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+
+// ====================
+
 applyGlobalBackend(app);
 
 app.get("/", (req, res) => {

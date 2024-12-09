@@ -1,7 +1,7 @@
 import { Db, MongoClient } from "mongodb";
 import logger from "../logger";
 
-const url = process.env.MONGO_URI || "mongodb://localhost:27017";
+export const url = process.env.MONGO_URI || "mongodb://localhost:27017";
 const client = new MongoClient(url);
 
 let db: Db;
