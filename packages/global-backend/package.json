@@ -7,7 +7,9 @@
     "@types/connect-mongodb-session": "^2.4.7",
     "@types/cookie-parser": "^1.4.8",
     "@types/express": "^5.0.0",
-    "@types/express-session": "^1.18.1"
+    "@types/express-session": "^1.18.1",
+    "@types/passport": "^1.0.17",
+    "@types/passport-discord": "^0.1.14"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
@@ -20,7 +22,8 @@
     "express": "^4.21.2",
     "express-session": "^1.18.1",
     "mongodb": "^6.11.0",
-    "passport": "^0.7.0"
+    "passport": "^0.7.0",
+    "passport-discord": "^0.1.4"
   },
   "scripts": {
     "start": "bun run src/index.ts",

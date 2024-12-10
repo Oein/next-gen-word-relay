@@ -9,6 +9,7 @@ import MDBSession from "connect-mongodb-session";
 // Components
 import applyWS from "./components/ws";
 import applyGlobalBackend from "./components/global";
+import applyAuth from "./components/auth";
 
 // Common Libraries
 import logger from "@logger";
@@ -51,6 +52,7 @@ app.use(
 // ====================
 
 applyGlobalBackend(app);
+applyAuth(app);
 
 app.get("/", (req, res) => {
   res.send({

@@ -9,6 +9,7 @@ import MDBSession from "connect-mongodb-session";
 
 // Components
 import applyChannelManager from "./components/channelManager";
+import applyAuth from "./components/auth";
 
 // Common Libraries
 import logger from "@logger";
@@ -54,6 +55,9 @@ app.use(
 // ====================
 
 applyChannelManager(app);
+applyAuth(app);
+
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
   res.send({

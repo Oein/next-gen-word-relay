@@ -39,17 +39,26 @@ export async function disconnect() {
   logger.success("Disconnected from MongoDB");
 }
 
-// Handle before closing
-process.on("beforeExit", async () => {
-  await disconnect();
-});
-
 export function getWordsCollection() {
   return db.collection<{
     word: string;
     lang: number;
     tags: string[];
   }>("words", {});
+}
+
+export type IUser = {
+  provider: string;
+  id: string;
+  email: string;
+  username: string;
+
+  permissions: string[];
+  banned?: Date;
+};
+
+export function getAuthCollection() {
+  return db.collection<IUser>("auth", {});
 }
 
 export default client;
