@@ -1,5 +1,4 @@
 import { getAuthCollection, type IUser } from "@common/db";
-import { Router } from "express";
 import type { Express } from "express";
 import { ObjectId } from "mongodb";
 
@@ -37,12 +36,5 @@ export default function applyAuth(app: Express) {
           user: user,
         });
       });
-  });
-
-  const router = Router();
-  app.use("/auth", router);
-
-  router.get("/user", (req, res) => {
-    res.send(req.user);
   });
 }

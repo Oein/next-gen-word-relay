@@ -1,4 +1,5 @@
 import { getAuthCollection, type IUser } from "@common/db";
+import logger from "@logger";
 import { Router } from "express";
 import type { Express } from "express";
 import { ObjectId } from "mongodb";
@@ -56,8 +57,8 @@ export default function applyAuth(app: Express) {
           scope: ["identify", "email"],
         },
         async (
-          accessToken: string,
-          refreshToken: string,
+          _accessToken: string,
+          _refreshToken: string,
           profile: DiscordProfile,
           done: any
         ) => {
@@ -132,7 +133,7 @@ export default function applyAuth(app: Express) {
       passport.authenticate("discord", {
         failureRedirect: "/auth/signin",
       }),
-      (req, res) => {
+      (_req, res) => {
         res.redirect("/");
       }
     );
@@ -145,15 +146,12 @@ export default function applyAuth(app: Express) {
       },
       (e) => {
         if (e) {
-          console.error(e);
-          //   logger.error(e);
+          logger.error(e);
+          res.status(500).send("Error logging out");
+          return;
         }
         res.redirect((req.query.callback as string) || "/");
       }
     );
-  });
-
-  router.get("/user", (req, res) => {
-    res.send(req.user);
   });
 }
