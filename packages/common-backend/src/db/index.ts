@@ -7,6 +7,15 @@ const client = new MongoClient(url);
 
 let db: Db;
 
+declare global {
+  namespace Express {
+    interface User {
+      id: string;
+      user: IUser;
+    }
+  }
+}
+
 export async function ensureIndexes() {
   await getWordsCollection().createIndex(
     { word: 1 },

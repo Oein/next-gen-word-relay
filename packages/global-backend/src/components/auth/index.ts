@@ -9,15 +9,7 @@ import {
   Strategy as DisStrategy,
   type Profile as DiscordProfile,
 } from "passport-discord";
-
-declare global {
-  namespace Express {
-    interface User {
-      id: string;
-      user: IUser;
-    }
-  }
-}
+import CFG from "../../config/config";
 
 export default function applyAuth(app: Express) {
   app.use(passport.initialize());
@@ -131,10 +123,10 @@ export default function applyAuth(app: Express) {
     router.get(
       "/discord/callback",
       passport.authenticate("discord", {
-        failureRedirect: "/auth/signin",
+        failureRedirect: CFG.AUTH.FAILURE_REDIRECT,
       }),
       (_req, res) => {
-        res.redirect("/");
+        res.redirect(CFG.AUTH.SUCCESS_REDIRECT);
       }
     );
   }

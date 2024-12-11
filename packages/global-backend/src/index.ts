@@ -1,6 +1,7 @@
 import express from "express";
 import { createServer } from "http";
 import "dotenv/config";
+import cors from "cors";
 import CFG from "./config/config";
 
 import cookieParser from "cookie-parser";
@@ -20,6 +21,11 @@ await connectDB();
 
 const app = express();
 
+app.use(
+  cors({
+    origin: CFG.ORIGIN,
+  })
+);
 app.use(
   express.json({
     limit: "1mb",
@@ -54,9 +60,9 @@ app.use(
 
 // ====================
 
-applyChannelManager(app);
 applyAuth(app);
 
+applyChannelManager(app);
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {

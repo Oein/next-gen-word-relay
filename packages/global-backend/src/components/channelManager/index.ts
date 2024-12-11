@@ -1,6 +1,7 @@
 import { Router } from "express";
 import type { Express } from "express";
 import CFG from "../../config/config";
+import { sign } from "jsonwebtoken";
 
 export default function applyChannelManager(app: Express) {
   const router = Router();
@@ -49,5 +50,85 @@ export default function applyChannelManager(app: Express) {
 
   router.get("/available-servers", (req, res) => {
     res.send(serverStatus);
+  });
+
+  router.get("/access-key", (req, res) => {
+    const idxStr = req.query.idx;
+    if (idxStr === undefined) {
+      res.send({
+        status: false,
+        error: "Invalid index",
+      });
+      return;
+    }
+
+    const idx = parseInt(idxStr as string);
+    const svr = CFG.channelServers[idx];
+    if (svr === undefined) {
+      res.send({
+        status: false,
+        error: "Invalid index",
+      });
+      return;
+    }
+
+    if (serverStatus[idx].status === "offline") {
+      res.send({
+        status: false,
+        error: "Server is offline",
+      });
+      return;
+    }
+
+    if (serverStatus[idx].online >= serverStatus[idx].max) {
+      res.send({
+        status: false,
+        error: "Server is full",
+      });
+      return;
+    }
+
+    if (req.user === undefined) {
+      res.send({
+        status: false,
+        error: "Not authenticated",
+      });
+      return;
+    }
+
+    if (req.user.user.banned && req.user.user.banned.getTime() >= Date.now()) {
+      res.send({
+        status: false,
+        error: "You are banned",
+      });
+      return;
+    }
+
+    // @ts-ignore
+
+    res.send({
+      status: true,
+      sv: CFG.channelServers[idx].url,
+      ak: sign(
+        {
+          id: req.user.id,
+          svn: sign({ time: Date.now() }, CFG.channelServers[idx].access_key, {
+            expiresIn: "1h",
+          }),
+        },
+        process.env.JWT_SECRET || "SuperS",
+        {
+          expiresIn: "1h",
+        }
+      ),
+    });
+  });
+
+  router.get("/user", (req, res) => {
+    res.send({
+      status: true,
+      user: req.user,
+      session: req.session,
+    });
   });
 }

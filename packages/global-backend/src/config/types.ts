@@ -7,6 +7,12 @@ export type IChannelServer = {
 export type Config = {
   PORT: number;
   PING_INTERVAL: number;
+  ORIGIN: string;
+
+  AUTH: {
+    SUCCESS_REDIRECT: string;
+    FAILURE_REDIRECT: string;
+  };
 
   channelServers: IChannelServer[];
 };
